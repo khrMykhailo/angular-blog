@@ -1,0 +1,45 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-control" [ngClass]="{invalid: form.get('title')?.invalid && form.get('title')?.touched}">
+        <label for="title">Введите заголовок:</label>
+        <input id="title" type="text" formControlName="title">
+        <div 
+        *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+        class="validation"
+        >
+            <small
+            *ngIf="form.get('title')?.errors?.['required']"
+            >
+            Поле обязательно к заполнению
+            </small>
+        </div>
+    </div>
+    <div class="form-control">
+        <label>Контент поста:</label>
+        <quill-editor
+        formControlName="text"
+        ></quill-editor>
+    </div>
+    <div class="form-control" [ngClass]="{invalid: form.get('author')?.invalid && form.get('author')?.touched}">
+        <label for="author">Автор поста:</label>
+        <input id="author" type="text" formControlName="author">
+        <div 
+        *ngIf="form.get('author')?.invalid && form.get('author')?.touched"
+        class="validation"
+        >
+            <small
+            *ngIf="form.get('author')?.errors?.['required']"
+            >
+            Поле обязательно к заполнению
+            </small>
+        </div>
+    </div>
+
+    <button 
+    type="submit"
+    class="btn btn-dark btn-block"
+    [disabled]="form.invalid"
+    >
+    Опубликовать пост
+    </button>
+
+</form>
